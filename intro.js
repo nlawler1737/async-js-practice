@@ -1,6 +1,5 @@
-/* --- INTRO --- */
-
 // Long-running functions prevent any other lines from executing until finished
+
 // Allows other js to run while longer tasks are running
 
 // Synchronous
@@ -12,14 +11,15 @@ console.log(`The sum of ${num1} + ${num2} is ${sum}`)
 
 // Asynchronous
 // Starts process then uses a listener / callback function to respond to once completed
-fetch("https://raw.githubusercontent.com/mdn/content/main/files/jsondata/SpecData.json").then(()=>console.log("Fetch Completed"))
-console.log("Runs Before 'fetch'")
+const xhr = new XMLHttpRequest();
 
+  xhr.addEventListener("loadend", () => {
+    console.log(`Finished with status: ${xhr.status}`);
+  });
 
-/* --- PROMISES --- */
-
-/* --- PROMISE BASED API --- */
-
-/* --- WORKERS --- */
-
-/* --- SEQUENCING ANIMATIONS --- */
+  xhr.open(
+    "GET",
+    "https://raw.githubusercontent.com/mdn/content/main/files/jsondata/SpecData.json"
+  );
+  xhr.send();
+console.log("Runs Before Request")
